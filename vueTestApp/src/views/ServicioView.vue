@@ -2,7 +2,20 @@
 import {ref} from 'vue';
 import axios from 'axios';
 
-const products = ref<Array<any>>([]);
+interface Producto{
+    category:string;
+    description:string;
+    id:number;
+    image:string;
+    price:number;
+    raiting:{
+        rate:number;
+        count:number;
+    };
+    title:string;
+};
+
+const products = ref<Array<Producto>>([]);
 
 axios.get('https://fakestoreapi.com/products', {
     headers:{
@@ -25,6 +38,12 @@ alert('Error al consumir el servicio');
 
 </script>
 <template>
-
+    <div v-for="item of products">
+    <img :src="item.image" alt="Producto"></div>
 </template>
-<style scoped></style>
+<style scoped>
+img{
+    width: 18px;
+
+}
+</style>
